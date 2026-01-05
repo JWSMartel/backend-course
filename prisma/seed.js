@@ -1,22 +1,22 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-const creatorId = "2fea71b8-dad8-4142-8d28-018b769b4271";
+const userId = "2fea71b8-dad8-4142-8d28-018b769b4271";
 const movies = [
     {
         title:"Interstellar",
         overview:"A team of explorers travel through a wormhold",
         releaseYear:2014,
-        genres:["Adventure","Drama","Sci-Fi"],
+        generes:["Adventure","Drama","Sci-Fi"],
         runtime:169,
         posterUrl:"https://example.com/intersteller.jpg",
-        createdBy:useImperativeHandle,
+        createdBy:userId,
     },
     {
         title:"The Shawshank Redemption",
         overview:"Two imprisoned men bond",
         releaseYear:1994,
-        genres:["Drama"],
+        generes:["Drama"],
         runtime:142,
         posterUrl:"https://example.come/shawshank.jpg",
         createdBy:userId,
