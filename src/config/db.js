@@ -1,8 +1,25 @@
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "@prisma/client";
+import { PrismaPg } from "@prisma/adapter-pg";
+import pg from "pg";
+
+const pool = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+});
+
+const adapter = new PrismaPg(pool);
 
 const prisma = new PrismaClient({
-    log:process.env.NOD_ENV==="development"?["query","error","warn"]:["error"],
+  adapter,
+  log:
+    process.env.NODE_ENV === "development"
+      ? ["query", "error", "warn"]
+      : ["error"],
 });
+
+/*Removing to try and fix versioning issues - real issue ended up being that PrismaClient had /extension on it which it didn't need. Still keeping the adapter since it seems to be required for modern prisma.*/
+/*const prisma = new PrismaClient({
+    log:process.env.NODE_ENV==="development"?["query","error","warn"]:["error"],
+});*/
 
 const connectDB = async () =>{
     try{
