@@ -1,7 +1,7 @@
 import {prisma} from "../config/db.js"
 
 const addToWatchlist = async (req,res)=>{
-    const {movieId, status,rating, notes, userId} = req.body;
+    const {movieId, status,rating, notes} = req.body;
 
     const movie = await prisma.movie.findUnique({
         where:{id:movieId}
@@ -64,9 +64,6 @@ const removeFromWatchlist = async(req, res)=>{
 
 const updateWatchlistItem = async(req, res)=>{
     const {status, rating, notes} = req.body;
-    console.log("STATUS:",status);
-    console.log("RATING:",rating);
-    console.log("NOTES:",notes);
     const watchlistItem = await prisma.watchlistItem.findUnique({
         where:{id:req.params.id}
     });
@@ -82,15 +79,12 @@ const updateWatchlistItem = async(req, res)=>{
     const updateData = {};
     if(status !== undefined){
         updateData.status = status.toUpperCase();
-        console.log("Status updated");
     }
     if(rating!==undefined){
         updateData.rating = rating;
-        console.log("rating updated");
     }
     if(notes !== undefined){
         updateData.notes = notes;
-        console.log("notes updated");
     }
 
     await prisma.watchlistItem.update({
