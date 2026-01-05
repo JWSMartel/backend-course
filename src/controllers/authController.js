@@ -2,16 +2,14 @@ import {prisma} from "../config/db.js"
 import bcrypt from "bcryptjs";
 
 const register = async (req, res) => {
-    //console.log("REQ BODY: ",req.body);
-    //console.log("EMAIL VALUE: ",req.body.email);
-    //const {name, email, password} = req.body;
-    const body = req.body;
-    //res.json({message:"Connection"}); THIS WORKS
-    res.json(body);
-    //res.status(200).json(body);
-    /*const userExists = await prisma.user.findUnique({
-        where:{email:email},
+    const {name, email, password} = req.body;
+    if (!name || !email || !password) {
+        return res.status(400).json({ error: "Missing required fields" });
+    }
+    const userExists = await prisma.user.findUnique({
+        where:{email: email},
     });
+    
 
     if(userExists){
         return res.status(400).json({error:"User already exists with this email"});
@@ -34,7 +32,7 @@ const register = async (req, res) => {
                 email:email
             }
         }
-    });*/
+    });
 };
 
 export {register};

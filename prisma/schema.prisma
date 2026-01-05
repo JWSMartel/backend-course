@@ -11,7 +11,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  //url = env("DATABASE_URL") THIS IS OLD WAY OF DOING THINGS? Commenting this out seems to work
+  url = env("DATABASE_URL") //THIS IS OLD WAY OF DOING THINGS? Commenting this out seems to work
 }
 
 model User {
