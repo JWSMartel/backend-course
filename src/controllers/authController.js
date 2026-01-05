@@ -2,14 +2,8 @@ import {prisma} from "../config/db.js"
 import bcrypt from "bcryptjs";
 
 const register = async (req, res) => {
-    //console.log("REQ BODY: ",req.body);
-    //console.log("EMAIL VALUE: ",req.body.email);
-    //const {name, email, password} = req.body;
-    const body = req.body;
-    //res.json({message:"Connection"}); THIS WORKS
-    res.json(body);
-    //res.status(200).json(body);
-    /*const userExists = await prisma.user.findUnique({
+    const {name, email, password} = req.body;
+    const userExists = await prisma.user.findUnique({
         where:{email:email},
     });
 
@@ -34,7 +28,7 @@ const register = async (req, res) => {
                 email:email
             }
         }
-    });*/
+    });
 };
 
 export {register};
